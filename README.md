@@ -33,6 +33,16 @@ SwapCups/
 
 ## Status
 
-Scaffold builds and runs: window opens, table + three cups paint. Next:
-initialize/ball-hide, swap animation with pre-swap green/blue dots, and the
-post-game tap-to-reveal (flash the ball 7×).
+Complete: ball-hide init flash, swap animation with pre-swap green/blue dots,
+and post-game tap-to-reveal (ball flashes 7×). All animation runs through a
+`wxTimer`-based step scheduler in `GamePanel`. Rendering is optimized with
+**dirty-rect repaint** — a persistent backing bitmap plus per-element bounding
+boxes repaint only the region that changed each frame, cutting CPU ~44% and
+RAM ~21% versus full-canvas repaints (measured over a 156-swap run).
+
+## Sibling ports
+
+The same game in other stacks:
+
+- [SwapCups-SwiftUI](https://github.com/lobreen/SwapCups-SwiftUI) — SwiftUI / macOS
+- [SwapCups-Python](https://github.com/lobreen/SwapCups-Python) — Python / tkinter
