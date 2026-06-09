@@ -49,6 +49,39 @@ and post-game tap-to-reveal (ball flashes 7×). All animation runs through a
 boxes repaint only the region that changed each frame, cutting CPU ~44% and
 RAM ~21% versus full-canvas repaints (measured over a 156-swap run).
 
+## Verifying on a new OS
+
+wxWidgets and CMake are cross-platform; only the dependency package names and
+the run path differ. Install the deps, then the build is the same everywhere:
+
+```sh
+cmake -S . -B build
+cmake --build build
+```
+
+The `MACOSX_BUNDLE` target option is ignored off macOS, so on Linux/FreeBSD you
+get a plain `build/SwapCups` executable (and `SwapCups.exe` on Windows) rather
+than a `.app`.
+
+| OS | Install deps | Run |
+|---|---|---|
+| Linux (Debian/Ubuntu) | `sudo apt install cmake g++ libwxgtk3.2-dev` | `./build/SwapCups` |
+| Linux (Fedora) | `sudo dnf install cmake gcc-c++ wxGTK-devel` | `./build/SwapCups` |
+| Linux (Arch) | `sudo pacman -S cmake wxwidgets-gtk3` | `./build/SwapCups` |
+| FreeBSD | `pkg install cmake wx32-gtk3` | `./build/SwapCups` |
+| Windows (MSYS2, incl. ARM64) | install `cmake` + `wxWidgets` from the matching MSYS2 toolchain | `build\SwapCups.exe` |
+
+(Exact package names vary by distro/version — e.g. some Debian releases use
+`libwxgtk3.0-gtk3-dev`, and the FreeBSD/MSYS2 names track the wx 3.x version.)
+
+**Functional check (same on every OS):**
+1. Pick a cup — it lifts and the ball flashes 7×.
+2. Enter swaps (e.g. `ABCAB`) and press **Swap!** — green/blue dots blink over each pair before the cups slide.
+3. When done, click/tap a cup — the ball flashes 7× if found, else "Nothing under that cup."
+
+When a platform passes, flip its badge from `planned-lightgrey` to
+`tested-2ea44f` and add the topic, e.g. `gh repo edit … --add-topic linux`.
+
 ## Sibling ports
 
 The same game in other stacks:
