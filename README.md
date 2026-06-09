@@ -1,5 +1,14 @@
 # SwapCups (C++ / wxWidgets)
 
+![macOS](https://img.shields.io/badge/macOS-tested-2ea44f)
+![Linux](https://img.shields.io/badge/Linux-planned-lightgrey)
+![FreeBSD](https://img.shields.io/badge/FreeBSD-planned-lightgrey)
+![Windows ARM64](https://img.shields.io/badge/Windows%20ARM64-planned-lightgrey)
+
+> Platforms tested: **macOS**. wxWidgets is cross-platform, so Linux (GTK),
+> FreeBSD, and Windows (incl. ARM64) are expected to work and are planned for
+> testing — not yet verified.
+
 A C++ wxWidgets port of the Swap Cups shell game (previously built in Python and
 SwiftUI). Three cups sit inverted on a table; one hides a blue ball. The player
 hides the ball, runs a sequence of swaps (A = left↔middle, B = middle↔right,
